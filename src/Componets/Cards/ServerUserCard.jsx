@@ -15,7 +15,7 @@ const ServerUserCard = async () => {
         <div className="relative -mt-12 flex justify-center">
           {/* User Image */}
           <div className="p-1 bg-white rounded-full">
-            {session?.user?.image ? (
+            {session?.user?.image && session.user.image !== "" ? (
               <Image
                 src={session.user.image}
                 alt="Profile"

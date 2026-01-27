@@ -1,10 +1,7 @@
+import { getUsers } from "@/app/(Server)/lib/connectDB";
 import NextAuth from "next-auth";
+import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
-
-const userList = [
-  { name: "hello", password: "1234" },
-  { name: "dummy", password: "5678" },
-];
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -15,18 +12,25 @@ export const authOptions = {
 
       //   form inputs
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        email: {
+          label: "email",
+          type: "email",
+          placeholder: "enter your email",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const { username, password } = credentials;
+        const { email, password } = credentials;
+        const userCollection = await getUsers();
 
         // Find User
-        const user = userList.find((u) => u.name == username);
+        const user = await userCollection.findOne({ email });
         if (!user) return null;
 
+        console.log(user);
+
         // password Check
-        const okPassword = user.password == password;
+        const okPassword = await bcrypt.compare(password, user.password);
 
         if (okPassword) {
           return user;

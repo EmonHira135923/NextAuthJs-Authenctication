@@ -1,8 +1,10 @@
 "use client";
 import { DomainURL } from "@/utils/DomainURL";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const handleform = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,20 +15,19 @@ const RegisterForm = () => {
     formData.append("password", form.password.value);
     formData.append("image", form.image.files[0]); // real file
 
-    console.log("registration successfully");
-
     const res = await fetch(`${DomainURL}/auth/register`, {
       method: "POST",
       body: formData, // 🔥 No headers!
     });
 
     const data = await res.json();
-    console.log("data", data);
+    console.log("data", data.result);
 
     // check success
     if (data.success && data.result?.insertedId) {
       alert("Form Submitted");
       form.reset();
+      router.push("/");
     } else {
       alert("Registration failed: " + (data.message || "Unknown error"));
     }

@@ -1,5 +1,6 @@
 import { getUsers } from "@/app/(Server)/lib/connectDB";
 import bcrypt from "bcrypt";
+import { revalidatePath } from "next/cache";
 
 // Get Method
 export async function GET(request) {
@@ -91,6 +92,7 @@ export async function POST(request) {
     };
 
     const result = await userCollection.insertOne(data);
+    revalidatePath("/");
 
     return Response.json(
       { message: "Added User Data successfully", success: true, result },
