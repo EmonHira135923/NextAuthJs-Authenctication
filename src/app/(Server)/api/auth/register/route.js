@@ -1,4 +1,5 @@
 import { getUsers } from "@/app/(Server)/lib/connectDB";
+import bcrypt from "bcrypt";
 
 // Get Method
 export async function GET(request) {
@@ -78,11 +79,14 @@ export async function POST(request) {
       );
     }
 
+    const hasedPassword = await bcrypt.hash(password, 10);
+
     const data = {
       name,
       email,
-      password,
+      password: hasedPassword,
       image,
+      role: "user",
       created_at: new Date(),
     };
 
