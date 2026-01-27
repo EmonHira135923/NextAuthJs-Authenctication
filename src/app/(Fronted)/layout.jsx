@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Header from "@/Componets/Header";
 import SessionProviders from "@/context/SessionProviders";
+import Header from "@/Componets/Header";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
