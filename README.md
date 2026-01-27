@@ -17,3 +17,11 @@
 2 ---> Providers ---> Using Crediantial ---> import Crediantial
 
 3 ---> Intialization ---> take this export { handler as GET, handler as POST }
+
+4 ---> Backend API Route ---> getServerSession
+
+5 ---> same to same design as userCard for Client
+
+6 ---> Options for right code ---> NEXTAUTHSECRET_KEY_ADD
+
+7 ---> NEXTAUTH ---> take ---> Name,Email,Image

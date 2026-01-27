@@ -1,5 +1,6 @@
 import LoginButton from "@/Componets/Buttons/LoginButton";
 import RegistrationButton from "@/Componets/Buttons/RegistrationButton";
+import ServerUserCard from "@/Componets/Cards/ServerUserCard";
 import UserCard from "@/Componets/Cards/UserCard";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,6 +37,7 @@ export default function Home() {
           <LoginButton />
           <RegistrationButton />
         </div>
+        <ServerUserCard />
       </div>
     </main>
   );
