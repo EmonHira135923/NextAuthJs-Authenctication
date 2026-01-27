@@ -1,3 +1,6 @@
+import LoginButton from "@/Componets/Buttons/LoginButton";
+import RegistrationButton from "@/Componets/Buttons/RegistrationButton";
+import UserCard from "@/Componets/Cards/UserCard";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,6 +21,7 @@ export default function Home() {
 
         {/* Text Content */}
         <div className="space-y-4">
+          <UserCard />
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
             Secure Auth for <span className="text-blue-600">Next.js</span>
           </h1>
@@ -28,19 +32,9 @@ export default function Home() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/login"
-            className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
-          >
-            Get Started
-          </Link>
-          <Link
-            href="/reg"
-            className="px-8 py-3 bg-white text-gray-700 font-semibold border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Create Account
-          </Link>
+        <div className="flex mb-10 justify-center gap-4">
+          <LoginButton />
+          <RegistrationButton />
         </div>
       </div>
     </main>
