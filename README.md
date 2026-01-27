@@ -25,3 +25,7 @@
 6 ---> Options for right code ---> NEXTAUTHSECRET_KEY_ADD
 
 7 ---> NEXTAUTH ---> take ---> Name,Email,Image
+
+8 ---> Make Api for Registration and Login use this api router
+
+9 ----> Optionals and take callbacks

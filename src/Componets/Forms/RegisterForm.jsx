@@ -13,15 +13,26 @@ const RegisterForm = () => {
     formData.append("name", form.name.value);
     formData.append("email", form.email.value);
     formData.append("password", form.password.value);
-    formData.append("image", form.image.files[0]); // real file
+    formData.append("image", form.image.files[0]);
+
+    // 🔥 FormData এর ভিতরের সব ডেটা দেখার জন্য এই অংশটি যোগ করা হয়েছে:
+    console.log("--- Debugging FormData ---");
+    for (let [key, value] of formData.entries()) {
+      if (key === "image") {
+        console.log(`${key}:`, value.name, `(${value.size} bytes)`);
+      } else {
+        console.log(`${key}: ${value}`);
+      }
+    }
+    console.log("--------------------------");
 
     const res = await fetch(`${DomainURL}/auth/register`, {
       method: "POST",
-      body: formData, // 🔥 No headers!
+      body: formData, // ব্রাউজার নিজ থেকেই 'Content-Type': 'multipart/form-data' সেট করে নিবে
     });
 
     const data = await res.json();
-    console.log("data", data.result);
+    console.log("Response from server:", data);
 
     // check success
     if (data.success && data.result?.insertedId) {
