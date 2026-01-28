@@ -8,39 +8,75 @@ const RegisterForm = () => {
   const handleform = async (e) => {
     e.preventDefault();
     const form = e.target;
+    const imageFile = form.image.files[0];
 
-    const formData = new FormData();
-    formData.append("name", form.name.value);
-    formData.append("email", form.email.value);
-    formData.append("password", form.password.value);
-    formData.append("image", form.image.files[0]);
-
-    // 🔥 FormData এর ভিতরের সব ডেটা দেখার জন্য এই অংশটি যোগ করা হয়েছে:
-    console.log("--- Debugging FormData ---");
-    for (let [key, value] of formData.entries()) {
-      if (key === "image") {
-        console.log(`${key}:`, value.name, `(${value.size} bytes)`);
-      } else {
-        console.log(`${key}: ${value}`);
-      }
+    // ১. ইমেজ সিলেক্ট করা হয়েছে কিনা চেক করুন
+    if (!imageFile) {
+      alert("Please upload an image first!");
+      return;
     }
-    console.log("--------------------------");
 
-    const res = await fetch(`${DomainURL}/auth/register`, {
-      method: "POST",
-      body: formData, // ব্রাউজার নিজ থেকেই 'Content-Type': 'multipart/form-data' সেট করে নিবে
-    });
+    try {
+      // ২. Cloudinary-তে আপলোড করার জন্য FormData তৈরি
+      const cloudinaryData = new FormData();
+      cloudinaryData.append("file", imageFile);
+      cloudinaryData.append("upload_preset", "fronted_image_upload"); // আপনার তৈরি করা Preset Name দিন
+      cloudinaryData.append("cloud_name", "dd015bguh");
+      cloudinaryData.append("folder", "users");
 
-    const data = await res.json();
-    console.log("Response from server:", data);
+      console.log("Uploading image to Cloudinary...");
 
-    // check success
-    if (data.success && data.result?.insertedId) {
-      alert("Form Submitted");
-      form.reset();
-      router.push("/");
-    } else {
-      alert("Registration failed: " + (data.message || "Unknown error"));
+      // ৩. Cloudinary API-তে POST রিকোয়েস্ট
+      const cloudinaryRes = await fetch(
+        "https://api.cloudinary.com/v1_1/dd015bguh/image/upload",
+        {
+          method: "POST",
+          body: cloudinaryData,
+        },
+      );
+
+      const imageData = await cloudinaryRes.json();
+
+      if (!imageData.secure_url) {
+        throw new Error("Image upload failed to Cloudinary");
+      }
+
+      const imageUrl = imageData.secure_url;
+      console.log("Image Uploaded! URL:", imageUrl);
+
+      // ৪. আপনার নিজের ডাটাবেজে পাঠানোর জন্য অবজেক্ট তৈরি
+      const userData = {
+        name: form.name.value,
+        email: form.email.value,
+        password: form.password.value,
+        image: imageUrl, // এখানে সরাসরি স্ট্রিং URL যাচ্ছে
+      };
+
+      console.log("Sending data to your backend...", userData);
+
+      // ৫. আপনার ব্যাকএন্ডে ফাইনাল রিকোয়েস্ট
+      const res = await fetch(`${DomainURL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await res.json();
+      console.log("Server Response:", data);
+
+      // ৬. সাকসেস চেক
+      if (data.success) {
+        alert("Registration Successful!");
+        form.reset();
+        router.push("/");
+      } else {
+        alert("Registration failed: " + (data.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error during form submission:", error);
+      alert("Something went wrong. Check console for details.");
     }
   };
   return (
