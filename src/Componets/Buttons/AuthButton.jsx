@@ -32,7 +32,7 @@ const AuthButton = () => {
         </button>
       ) : (
         <>
-          /* --- Login Button (Indigo to Violet Gradient) --- */
+          {/* --- Login Button (Indigo to Violet Gradient) ---  */}
           <button
             onClick={() => signIn()}
             className="w-full sm:w-1/2 py-3.5 px-6 bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 border border-white/20"
@@ -53,7 +53,7 @@ const AuthButton = () => {
             </svg>
             Login
           </button>
-          /* --- Register Button (Emerald to Teal Gradient) --- */
+          {/* --- Register Button (Emerald to Teal Gradient) ---  */}
           <Link
             href="/reg"
             className="w-full sm:w-1/2 py-3.5 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200 hover:shadow-emerald-300 hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 border border-white/20 text-center"
