@@ -20,6 +20,24 @@ const Header = () => {
         >
           Home
         </Link>
+        <Link
+          href="/public"
+          className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+        >
+          Public
+        </Link>
+        <Link
+          href="/private"
+          className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+        >
+          Private
+        </Link>
+        <Link
+          href="/admin"
+          className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+        >
+          Admin
+        </Link>
 
         <Link
           href="/login"

@@ -29,3 +29,5 @@
 8 ---> Make Api for Registration and Login use this api router
 
 9 ----> Optionals and take callbacks
+
+10 ---> for navvar using login and register and logout ---> usesession --> status ---> authenticated

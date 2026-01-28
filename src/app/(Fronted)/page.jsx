@@ -1,5 +1,4 @@
-import LoginButton from "@/Componets/Buttons/LoginButton";
-import RegistrationButton from "@/Componets/Buttons/RegistrationButton";
+import AuthButton from "@/Componets/Buttons/AuthButton";
 import ServerUserCard from "@/Componets/Cards/ServerUserCard";
 import UserCard from "@/Componets/Cards/UserCard";
 import Image from "next/image";
@@ -33,8 +32,7 @@ export default function Home() {
 
         {/* Action Buttons */}
         <div className="flex mb-10 justify-center gap-4">
-          <LoginButton />
-          <RegistrationButton />
+          <AuthButton />
         </div>
         <ServerUserCard />
       </div>
