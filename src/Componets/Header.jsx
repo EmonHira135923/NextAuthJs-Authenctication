@@ -40,13 +40,6 @@ const Header = () => {
         </Link>
 
         <Link
-          href="/login"
-          className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
-        >
-          Login
-        </Link>
-
-        <Link
           href="/reg"
           className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-all shadow-md active:scale-95"
         >

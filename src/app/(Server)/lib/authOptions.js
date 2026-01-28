@@ -20,7 +20,11 @@ export const authOptions = {
           type: "email",
           placeholder: "enter your email",
         },
-        password: { label: "Password", type: "password" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "enter your password",
+        },
       },
       async authorize(credentials, req) {
         const { email, password } = credentials;

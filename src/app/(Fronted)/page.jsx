@@ -7,6 +7,10 @@ export default function Home() {
   return (
     <main className="min-h-[calc(100vh-73px)] flex flex-col items-center justify-center bg-gray-50 px-4">
       <div className="max-w-4xl w-full text-center space-y-8">
+        {/* Action Buttons */}
+        <div className="flex mb-10 justify-center gap-4">
+          <AuthButton />
+        </div>
         {/* Illustration/Image Section */}
         <div className="relative w-full h-64 md:h-80">
           <Image
@@ -28,11 +32,6 @@ export default function Home() {
             A simple, lightweight starter for implementing NextAuth.js. Manage
             your users, protect your routes, and scale with ease.
           </p>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex mb-10 justify-center gap-4">
-          <AuthButton />
         </div>
         <ServerUserCard />
       </div>
